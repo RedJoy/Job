@@ -30,6 +30,12 @@ class OtherApp extends Component {
     }
     this.addBabe = this.addBabe.bind(this);//常用绑定this
   }
+  componentWillMount() {
+    console.log('组件马上就要加载了')
+  }
+  componentDidMount() {
+    console.log('组件加载完毕')
+  }
   addBabe = ()=>{ 
     console.log('生个宝宝');
     this.setState({
@@ -37,6 +43,7 @@ class OtherApp extends Component {
     })
   }
   render() {
+    console.log('组件正在加载了')
     return (
       <div>
         <h2>其他的例子,{this.props.name}</h2>
