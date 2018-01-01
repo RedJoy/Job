@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Button,List} from 'antd-mobile';
+// import 'antd-mobile/dist/antd-mobile.css';
 import logo from './logo.svg';
 import './App.css';
 import {createStore} from 'redux';
@@ -29,12 +31,29 @@ class OtherApp extends Component {
       babes: ['大宝','二宝']
     }
     this.addBabe = this.addBabe.bind(this);//常用绑定this
+    console.log('组件初始化');
   }
   componentWillMount() {
-    console.log('组件马上就要加载了')
+    console.log('组件马上就要挂载了');
   }
   componentDidMount() {
-    console.log('组件加载完毕')
+    console.log('组件挂载完毕');
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log('组件要接受父组件的值了');
+  }
+  shouldComponentUpdate() {
+    console.log('判断是不是要更新组件');
+    return true;  //要返回 true
+  }
+  componentWillUpdate() {
+    console.log('马上就要更新组件了');
+  }
+  componentDidUpdate() {
+    console.log('组件更新完毕');
+  }
+  componentWillUnmount() {
+    console.log('组件卸载了');
   }
   addBabe = ()=>{ 
     console.log('生个宝宝');
@@ -43,17 +62,19 @@ class OtherApp extends Component {
     })
   }
   render() {
-    console.log('组件正在加载了')
+    console.log('组件正在加载了');
     return (
       <div>
         <h2>其他的例子,{this.props.name}</h2>
         {/*  <button onClick={()=>this.addBabe()}>生宝宝</button>*/}
-        <button onClick={this.addBabe}>生宝宝</button>
-        <ul>
-          {this.state.babes.map(v => {
-            return <li key={v}>{v}</li>
+        <Button type='primary' onClick={this.addBabe}>生宝宝</Button>
+        <List renderHeader={()=>'宝宝们'}>
+          {this.state.babes.map(v=>{
+            return (
+              <List.Item key={v}>{v}</List.Item>
+            )
           })}
-        </ul>
+        </List>
       </div>
     )
   }
