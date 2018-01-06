@@ -47,6 +47,7 @@ class App extends Component {
     const num = store.getState();
     const addBabe = this.props.addBabe;
     const removeBabe = this.props.removeBabe;
+    const addBabeAsync = this.props.addBabeAsync;
     return (
       <div className="App">
         <header className="App-header">
@@ -59,6 +60,7 @@ class App extends Component {
         <h3>现在有babe{num}个</h3>
         <button onClick={()=>store.dispatch(addBabe())}>生宝宝</button>
         <button onClick={()=>store.dispatch(removeBabe())}>不要宝宝了</button>
+        <button onClick={()=>store.dispatch(addBabeAsync())}>慢慢生</button>
       </div>
     );
   }

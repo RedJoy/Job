@@ -2,13 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {createStore} from 'redux';
-import {counter,addBabe,removeBabe} from './index.redux';
+import {createStore,applyMiddleware,compose} from 'redux';
+import thunk from 'redux-thunk';
+import {counter,addBabe,removeBabe,addBabeAsync} from './index.redux';
 // import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore(counter);
+
+const reduxDevtools = window.devToolsExtension ? window.devToolsExtension() : ()=>{};
+const store = createStore(counter,compose(
+	applyMiddleware(thunk),
+	reduxDevtools
+));
 function render() {
-	ReactDOM.render(<App store={store} addBabe={addBabe} removeBabe={removeBabe}/>, document.getElementById('root'));
+	ReactDOM.render(<App store={store} addBabe={addBabe} removeBabe={removeBabe} addBabeAsync={addBabeAsync}/>, document.getElementById('root'));
 }
 // registerServiceWorker();
 

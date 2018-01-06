@@ -24,3 +24,13 @@ export function addBabe() {
 export function removeBabe() {
   return {type:REMOVE_BABE};
 }
+// 延迟添加
+export function addBabeAsync() {
+  // thunk插件的作用，可以返回函数
+  return dispatch => {
+    setTimeout(()=>{
+      // 异步结束后，手动执行dispatch
+      dispatch(addBabe());
+    },2000);
+  }
+}
