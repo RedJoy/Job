@@ -6,14 +6,10 @@ import { addBabe ,removeBabe ,addBabeAsync } from './index.redux.js';
 import logo from './logo.svg';
 import './App.css';
 
-
-// const mapStatetoProps = (state) =>{
-//   return {num:state}
-// }
-// const actionCreators = { addBabe ,removeBabe ,addBabeAsync } ;
-// App = connect(mapStatetoProps,actionCreators)(App);
 @connect(
+  // 你要state什么属性放到props里
   state =>({num:state}),
+  // 你要什么方法，放到props里，自动dispatch
   { addBabe ,removeBabe ,addBabeAsync }
 )
 
