@@ -15,6 +15,7 @@ import {
 	Redirect,
 	Switch
 } from 'react-router-dom'; //router4
+import './config';
 
 const reduxDevtools = window.devToolsExtension ? window.devToolsExtension() : ()=>{};
 const store = createStore(reducers,compose(
