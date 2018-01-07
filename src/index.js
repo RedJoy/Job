@@ -2,10 +2,12 @@ import React, { Component }  from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Auth from './Auth';
+import Dashboard from './Dashboard';
 import {createStore,applyMiddleware,compose} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';//连接用
-import {counter} from './index.redux';
+import reducers from './reducers';
 import { 
 	BrowserRouter , 
 	Route ,
@@ -14,49 +16,27 @@ import {
 	Switch
 } from 'react-router-dom'; //router4
 
-// import App from './App';
-// import {counter} from './index.redux';
-
-
 const reduxDevtools = window.devToolsExtension ? window.devToolsExtension() : ()=>{};
-const store = createStore(counter,compose(
+const store = createStore(reducers,compose(
 	applyMiddleware(thunk),
 	reduxDevtools
 ));
+console.log(store.getState());
 
-function Add(){
-	return <h2>生宝宝</h2>
-}
-function RemoveBabe(){
-	return <h2>不要宝宝</h2>
-}
-
-class Test extends Component {
-	constructor(props) {
-		super(props);
-	}
-	render(){
-		console.log(this.props.location);
-		return <h2>测试组件 {this.props.match.params.location}</h2>
-	}
-}
+/*
+登录 未登录统一跳转到login
+导航+显示+注销
+router+redux
+*/
 ReactDOM.render(
 	(<Provider store={store}>
 		<BrowserRouter>
-			<div>
-				<ul>
-					<li><Link to="/"></Link>我们</li>
-					<li><Link to="/addbabe">生宝宝</Link></li>
-					<li><Link to="/removebabe">不要宝宝</Link></li>
-				</ul>
-				{/*只渲染命中的第一个route*/}
-				<Switch>
-					<Route path='/' exact component={App}></Route>
-					<Route path='/addbabe' component={Add}></Route>
-					<Route path='/removebabe' component={RemoveBabe}></Route>
-					<Route path='/:location' component={Test}></Route>
-				</Switch>
-			</div>
+			{/*只渲染命中的第一个route*/}
+			<Switch>
+				<Route path='/login' exact component={Auth}></Route>
+				<Route path='/dashboard' component={Dashboard}></Route>
+				<Redirect to='/dashboard' component={Dashboard}></Redirect>
+			</Switch>
 		</BrowserRouter>
 	</Provider>)
 		, document.getElementById('root')

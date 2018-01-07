@@ -7,7 +7,7 @@ const REMOVE_BABE = '不要宝宝了';
   通过reducer建立
   根据旧的state和action 生成新的 state
 */
-export function counter(state=0,action){
+export function counter(state=10,action){
   switch(action.type){
     case ADD_BABE:
       return state+1;
