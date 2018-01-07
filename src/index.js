@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import {createStore,applyMiddleware,compose} from 'redux';
 import thunk from 'redux-thunk';
-import {counter,addBabe,removeBabe,addBabeAsync} from './index.redux';
+import {Provider} from 'react-redux';//连接用
+import {counter} from './index.redux';
 // import registerServiceWorker from './registerServiceWorker';
 
 
@@ -13,11 +14,11 @@ const store = createStore(counter,compose(
 	applyMiddleware(thunk),
 	reduxDevtools
 ));
-function render() {
-	ReactDOM.render(<App store={store} addBabe={addBabe} removeBabe={removeBabe} addBabeAsync={addBabeAsync}/>, document.getElementById('root'));
-}
+
+ReactDOM.render(
+	(<Provider store={store}>
+		<App />
+	</Provider>)
+		, document.getElementById('root')
+)
 // registerServiceWorker();
-
-render();
-
-store.subscribe(render);
