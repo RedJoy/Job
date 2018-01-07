@@ -22,18 +22,19 @@ class Dashboard extends Component {
 		super(props)
 	}
 	render(){
+		const match = this.props.match;
 		console.log(this.props);
 		const app = (
 				<div>
 					{this.props.isAuth ? <button onClick={this.props.logout}>注销</button> : null }
 					<ul>
-						<li><Link to="/dashboard/"></Link>我们</li>
-						<li><Link to="/dashboard/addbabe">生宝宝</Link></li>
-						<li><Link to="/dashboard/removebabe">不要宝宝</Link></li>
+						<li><Link to={`${match.url}/`}></Link>我们</li>
+						<li><Link to={`${match.url}/addbabe`}>生宝宝</Link></li>
+						<li><Link to={`${match.url}/removebabe`}>不要宝宝</Link></li>
 					</ul>
-					<Route path='/dashboard/' component={App}></Route>
-					<Route path='/dashboard/' component={Add}></Route>
-					<Route path='/dashboard/' component={RemoveBabe}></Route>
+					<Route path={`${match.url}/`} component={App}></Route>
+					<Route path={`${match.url}/addbabe`} component={Add}></Route>
+					<Route path={`${match.url}/removebabe`} component={RemoveBabe}></Route>
 				</div>
 			);
 		const redirectToLogin = <Redirect to="/login"></Redirect>
