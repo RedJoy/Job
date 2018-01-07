@@ -6,6 +6,17 @@ import { addBabe ,removeBabe ,addBabeAsync } from './index.redux.js';
 import logo from './logo.svg';
 import './App.css';
 
+
+// const mapStatetoProps = (state) =>{
+//   return {num:state}
+// }
+// const actionCreators = { addBabe ,removeBabe ,addBabeAsync } ;
+// App = connect(mapStatetoProps,actionCreators)(App);
+@connect(
+  state =>({num:state}),
+  { addBabe ,removeBabe ,addBabeAsync }
+)
+
 class App extends Component {
   render() {
     const title = 'learn';
@@ -27,12 +38,7 @@ class App extends Component {
   }
 }
 
-const mapStatetoProps = (state) =>{
-  return {num:state}
-}
-const actionCreators = { addBabe ,removeBabe ,addBabeAsync } ;
 
-App = connect(mapStatetoProps,actionCreators)(App);
 export default App;
 
 
